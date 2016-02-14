@@ -1,6 +1,6 @@
 {
   "name": "tnr",
-  "version": "1.0.1",
+  "version": "1.0.12",
   "description": "tnorman utilities",
   "main": "tnr.js",
   "scripts": {
