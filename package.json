@@ -1,0 +1,23 @@
+{
+  "name": "tnr",
+  "version": "1.0.0",
+  "description": "tnorman utilities",
+  "main": "tnr.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tnormandao/tnr.git"
+  },
+  "keywords": [
+    "tnr",
+    "utilities"
+  ],
+  "author": "tnorman",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/tnormandao/tnr/issues"
+  },
+  "homepage": "https://github.com/tnormandao/tnr#readme"
+}
