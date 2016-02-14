@@ -1,2 +1,2 @@
 # tnr
-tnorman utilityes collection
+tnorman utilities collection
