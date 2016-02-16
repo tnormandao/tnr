@@ -1,5 +1,5 @@
-(function(window){
-  window.tnr = tnr || {};
+var tnr = tnr || {};
+(function(){
   tnr.lstorage = function( prefix ){
     var LS = this;
     LS.prefix = prefix+'_' || 'LS_';
@@ -81,4 +81,5 @@
       localStorage.removeItem( LS.prefIn( SID ) );
     }
   };
-})(this);
+
+})();

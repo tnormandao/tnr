@@ -1,5 +1,5 @@
-(function(window){
-  window.tnr = tnr || {};
+var tnr = tnr || {};
+(function(){
   tnr.math = function(){
     var utility = this;
 
@@ -26,4 +26,4 @@
     };
 
   };
-})(this);
+})();

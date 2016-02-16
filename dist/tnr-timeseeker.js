@@ -1,5 +1,5 @@
-(function(window){
-  window.tnr = tnr || {};
+var tnr = tnr || {};
+(function(){
   tnr.timeseeker = function( ManagerName ){
     var self = this;
     self.manager_name = 'timeseeker_' + ManagerName || 'timeseeker';
@@ -19,4 +19,4 @@
       console.log( self.manager_name + ': loading for ', self.timeGap( self.scope[0].time, self.scope[ self.scope.length-1 ].time )+' s' );
     }
   };
-})(this);
+})();

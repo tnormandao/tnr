@@ -1,5 +1,5 @@
-(function(window){
-  window.tnr = tnr || {};
+var tnr = tnr || {};
+(function(){
   tnr.fileloader = function( _selector, callback, readAs ){
     var exempleText = ' var myFileLoader = FileLoader("myInput", function(callback){ /* will run if file or files was loaded */ }, "readAsText" )';
     if(!_selector){ console.log('You must enter input.file ID, befor you can activete loader.' + '\n\n' + exempleText ); };
@@ -55,5 +55,4 @@
     Loader.setListener( _selector );
     return Loader;
   };
-
-})(this);
+})();

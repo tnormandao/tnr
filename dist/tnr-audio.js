@@ -1,5 +1,5 @@
-(function(window){
-  window.tnr = tnr || {};
+var tnr = tnr || {};
+(function(){
   tnr.audio = function( S ){
     var A = this;
     A.DOM = document.getElementById( S );
@@ -14,4 +14,4 @@
       return A.currentData;
     }
   };
-})(this);
+})();

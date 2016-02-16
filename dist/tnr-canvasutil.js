@@ -1,5 +1,5 @@
-(function(window){
-  window.tnr = tnr || {};
+var tnr = tnr || {};
+(function(){
   tnr.canvas = function(){
     var utility = this;
     utility.eachCtx = function( cn, cb ){
@@ -9,4 +9,4 @@
     };
     utility.randomHexColor = function(){ return "#"+((1<<24)*Math.random()|0).toString(16); };
   };
-})(this);
+})();
