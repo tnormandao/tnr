@@ -1,6 +1,6 @@
 var tnr = tnr || {};
 (function(){
-  tnr.canvas = function(){
+  tnr.canvas = new function(){
     var utility = this;
     utility.eachCtx = function( cn, cb ){
       var ctx = cn.getContext('2d'), mw = cn.width, mh = Canvas.height;

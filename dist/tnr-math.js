@@ -1,6 +1,6 @@
 var tnr = tnr || {};
 (function(){
-  tnr.math = function(){
+  tnr.math = new function(){
     var utility = this;
 
     utility.toFix = function( n, fn ){ return parseFloat( n.toFixed( fn )) };

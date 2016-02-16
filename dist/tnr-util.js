@@ -1,6 +1,6 @@
 var tnr = tnr || {};
 (function(){
-  tnr.util = function(){
+  tnr.util = new function(){
     var utility = this;
     utility.eachInTime = function( D, A, cb, O ){ var _c = A.length, _i = 0; (function N(){ if(_i < _c){ var _t = setTimeout( function(){ clearTimeout(_t); cb( A[ _i ] ); _i++; N(); }, D);}else{if(O){O()}}})();};
     utility.eachInSeries = function( li, cb, oe ){ var ci = -1; var nt = function(){ ci++; if( li.length > ci ){ cb( ci, li[ ci ], nt ); } else { if(oe){ oe() } } }; nt(); };
