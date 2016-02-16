@@ -1,4 +1,5 @@
 .idea
 .npmignore
-.gitignore
+/node_modules
+server.js
 
