@@ -1,0 +1,24 @@
+{
+  "name": "tnr",
+  "description": "tnorman utilities",
+  "main": "tnr.js",
+  "version": "0.0.1",
+  "authors": [
+    "tnorman"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "tnr",
+    "utilities"
+  ],
+  "homepage": "https://github.com/tnormandao/tnr",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
