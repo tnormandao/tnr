@@ -7,6 +7,6 @@ var tnr = tnr || {};
     utility.once = function( ex, cb ){ if (ex && cb){  var wt = setInterval( function(){ if( ex() ){ clearInterval( wt ); cb(); } }, 20); } };
     utility.deepGet = function( o, k ){ var _k = k.split('.'), v = o; for( var i = 0; i < _k.length; i++ ){ var I = _k[i]; if(v[I] || v[I] === 0){ v = v[I] } else { v = false; } } return v; };
     utility.deepSort = function( A, key ){var K = key.split('.');function pk( V ){ for( var _i = 0; _i < K.length; _i++ ){ var I = K[_i]; if(V[I] || V[I] === 0){ V = V[I] } else { V = false; } } return V; }A.sort(function( a, b ){var P = { a: pk(a), b: pk(b) };if( P.a && P.b ){ if ( P.a < P.b ) { return -1; } else if ( P.a > P.b ) { return 1; } return 0; } else if( P.a && !P.b ) { return -1; } else if( !P.a && P.b ) { return 1; } else { return 0; }});};
-    utility.uid = function( P ){  var p = P || 'uid_', d = new Date().getTime(); var uuid = 'xxxxxx-yyyy-xxxxxx'.replace(/[xy]/g, function(c){ var r=(d+Math.random()*16)%16|0;d=Math.floor(d/16); return(c=='x'?r:(r&0x3|0x8)).toString(16); }); return p+uuid.substring(0, 8); };
+    utility.uid = function( P ){  var p = P || 'uid_', d = new Date().getTime(); var uuid = 'xxxxxxyyyyxxxxxx'.replace(/[xy]/g, function(c){ var r=(d+Math.random()*16)%16|0;d=Math.floor(d/16); return(c=='x'?r:(r&0x3|0x8)).toString(16); }); return p+uuid; };
   };
 })();
