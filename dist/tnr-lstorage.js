@@ -40,8 +40,8 @@ var tnr = tnr || {};
     var LS = this;
     var ls_item = localStorage.getItem( LS.prefIn(SID) );
     console.log(ls_item);
-    if(item){
-      return item;
+    if(ls_item){
+      return ls_item;
     } else {
       return false;
     }

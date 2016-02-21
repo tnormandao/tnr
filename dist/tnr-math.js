@@ -5,6 +5,7 @@ var tnr = tnr || {};
 
     utility.toFix = function( n, fn ){ return parseFloat( n.toFixed( fn )) };
     utility.distance = function(X1,Y1,X2,Y2){ return Math.sqrt( Math.abs(Math.pow( X2 - X1, 2)) + Math.abs(Math.pow( Y2 - Y1, 2)) ); };
+    utility.get_distance = function(p1,p2){ var xd=p2.x-p1.x,yd=p2.y-p1.y,zd=(p1.z&&p2.z)?p2.z-p1.z:0; return Math.sqrt(xd*xd+yd*yd+zd*zd); };
     utility.toV2 = function(s, d){ return Math.atan2( (d.y - s.y), (d.x - s.x) ); };
     utility.toDegV2 = function(s, d){ return (360 / (Math.PI*2) ) * ( Math.PI + utility.toV2(s, d) ) ; };
     utility.radNormal = function(R){ if( R < 0){ R += Math.PI*2 } else if( R > Math.PI*2 ){R -= Math.PI*2} return R; };
