@@ -23,7 +23,7 @@
         };
         Inst.prototype.drop = function(arg){
             if(arg){var N = (typeof arg == 'string') ? 'n' : 'f';
-                for(var i = this._S.length; i > 0; i--){
+                for(var i = this._S.length-1; i > 0; i--){
                     if(this._S[i][N] == arg){
                         this._S.splice(i, 1);
                     }
