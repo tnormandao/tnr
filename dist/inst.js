@@ -23,9 +23,9 @@
         };
         Inst.prototype.drop = function(arg){
             if(arg){var N = (typeof arg == 'string') ? 'n' : 'f';
-                for(var i = this._S.length-1; i > 0; i--){
-                    if(this._S[i][N] == arg){
-                        this._S.splice(i, 1);
+                for(var i = this._S.length; i > 0; i--){
+                    if(this._S[i-1][N] == arg){
+                        this._S.splice(i-1, 1);
                     }
                 }
             } else {
