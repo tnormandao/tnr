@@ -21,6 +21,17 @@
             }
             return result;
         };
-        Inst.prototype.drop = function(n){ var S = this, _S = this._S;if(n){var N = (typeof n == 'string') ? 'n' : 'f'; for(var i = 0; i < _S.length; i++){ if(_S[i][N] == n){_S.splice(i, 1); } }} else { _S = []; }};
+        Inst.prototype.drop = function(arg){
+            if(arg){var N = (typeof arg == 'string') ? 'n' : 'f';
+                for(var i = this._S.length; i > 0; i--){
+                    if(this._S[i][N] == arg){
+                        this._S.splice(i, 1);
+                    }
+                }
+            } else {
+                this._S = [];
+            }
+        };
         Inst.prototype.run = function( t, ff, cb){   var S = this, _S = this._S; var t = t ? t : false, ff = ff ? ff : false; for(var i = 0; i < _S.length; i++){ if(!ff){ _S[i].f(t , _S[i].n ); } else { if( ff( _S[i].n, i) ){  _S[i].f( t , _S[i].n );  } } if(cb && i == _S.length-1){ cb(); } }};
         Inst.prototype.clone = function(){ var S = new this.constructor; for(var i = 0; i < this._S.length; i++){ S._S.push(this._S[i]) } return S; };
+
