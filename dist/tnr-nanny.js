@@ -1,7 +1,7 @@
-// Nanny is watching you! 0_0
 
-var tnr = tnr || {};
-var tnr.nanny = tnr.nanny || new function(){
+
+  // Nanny is watching you! 0_0
+  var NANNY = new function(){
 
     var UID = function( prefix ){
       var p = prefix || 'uid_';
@@ -49,6 +49,7 @@ var tnr.nanny = tnr.nanny || new function(){
 
 
     Nanny.session = function(options){
+
       var _NannySession = this;
 
       _NannySession.uid = UID('NannySession_');
@@ -147,43 +148,6 @@ var tnr.nanny = tnr.nanny || new function(){
         return  parseFloat(( num ).toFixed(3))
       };
 
-      _NannySession.Replay = {
-        storage: [],
-        temp: { q: false, t: false, p:false },
-        setTemp: function(){
-          _NannySession.Replay.temp.t = new Date().getTime();
-          _NannySession.Replay.temp.q = [
-            _NannySession.fixTo3(App.camera.quaternion.x),
-            _NannySession.fixTo3(App.camera.quaternion.y),
-            _NannySession.fixTo3(App.camera.quaternion.z),
-            _NannySession.fixTo3(App.camera.quaternion.w)
-          ];
-          _NannySession.Replay.temp.p = App.Markers.active.pointIndex;
-        },
-        newMoment: function(){
-          if(!_NannySession.Replay.temp.t){ return };
-          var Moment = new function(){
-            this.t1 = _NannySession.Replay.temp.t;
-            this.t2 = _NannySession.time.current;
-            this.q1 = _NannySession.Replay.temp.q;
-            this.q2 = [
-              _NannySession.fixTo3(App.camera.quaternion.x),
-              _NannySession.fixTo3(App.camera.quaternion.y),
-              _NannySession.fixTo3(App.camera.quaternion.z),
-              _NannySession.fixTo3(App.camera.quaternion.w)
-            ];
-            this.p1 = _NannySession.Replay.temp.p;
-            this.p2 = App.Markers.active.pointIndex;
-            this.tr = this.p1 == this.p2 ? 0 : 1;
-          };
-          _NannySession.Replay.storage.push( Moment );
-          _NannySession.Replay.temp = { q: false, t: false, p: false };
-        }
-
-      };
-
-
-
       // Statistics complex info
       _NannySession.getHistory = function(){
 
@@ -264,35 +228,8 @@ var tnr.nanny = tnr.nanny || new function(){
 
       };
 
-      _NannySession.getData = function(){
-        var response = {
-          zones: {
-            threejs: {
-              time: Math.round( _NannySession.Zone.storage[0].timeInSec()),
-              transitions: _NannySession.Zone.storage[0].transitions,
-              distance: Math.round( (_NannySession.Zone.storage[0].mousedistance + _NannySession.Zone.storage[0].touchdistance) )
-            },
-            map: {
-              time: Math.round(_NannySession.Zone.storage[1].timeInSec()),
-              transitions: _NannySession.Zone.storage[1].transitions,
-              distance: Math.round( (_NannySession.Zone.storage[1].mousedistance + _NannySession.Zone.storage[1].touchdistance) )
-            },
-            slider: {
-              time: Math.round(_NannySession.Zone.storage[2].timeInSec()),
-              transitions: _NannySession.Zone.storage[2].transitions,
-              distance: Math.round( (_NannySession.Zone.storage[2].mousedistance + _NannySession.Zone.storage[2].touchdistance) )
-            }
-          }
-        };
-        return response;
-      };
-
       _NannySession.getAllState = function(){
-
-        var allState = {
-          zones: []
-        };
-
+        var allState = { zones: [] };
         _.each( _NannySession.Zone.storage, function( obj ){
           allState.zones.push({
             name: obj.name,
@@ -310,42 +247,6 @@ var tnr.nanny = tnr.nanny || new function(){
           });
         });
 
-        // _.each( _NannySession.Point.storage, function( obj ){
-        //   allState.points.push({
-        //     name: obj.name,
-        //     type: obj.type,
-        //     time: obj.time,
-        //     index: obj.index,
-        //     roomType: obj.Marker.roomType,
-        //     timeCreate: obj.timeCreate,
-        //     timeHistory: obj.timeHistory,
-        //     transitionsFloor: obj.transitionsFloor,
-        //     mousedistance: obj.mousedistance,
-        //     mousedrag: obj.mousedrag,
-        //     touchdistance: obj.touchdistance
-        //   });
-        // });
-
-        // _.each( _NannySession.Orientation.storage, function( obj ){
-        //   allState.orientations.push({
-        //     name: obj.name,
-        //     type: obj.type,
-        //     timeCreate: obj.timeCreate,
-        //     timeHistory: obj.timeHistory,
-        //     time: obj.time
-        //   });
-        // });
-
-        // _.each( _NannySession.Mode.storage, function( obj ){
-        //   allState.modes.push({
-        //     name: obj.name,
-        //     type: obj.type,
-        //     timeCreate: obj.timeCreate,
-        //     timeHistory: obj.timeHistory,
-        //     time: obj.time
-        //   });
-        // });
-
         return allState;
       };
 
@@ -358,6 +259,7 @@ var tnr.nanny = tnr.nanny || new function(){
           _NannySession.Zone.storage[i].stop();
         }
       };
+
       _NannySession.play = function(){
         paused = false;
         for( var i = 0; i < options.zones.length; i++){
@@ -369,6 +271,7 @@ var tnr.nanny = tnr.nanny || new function(){
 
       _NannySession.heatmapHistory = [];
       _NannySession.heatmapPoint = false;
+
       _NannySession.heatmapGet = function(){
         return _NannySession.heatmapHistory;
       };
@@ -382,6 +285,7 @@ var tnr.nanny = tnr.nanny || new function(){
         touchdistance: 0,
         touchreleased: 0
       };
+
       _NannySession.element = document;
 
       var getDistance = function( X1, Y1, X2, Y2){
@@ -401,6 +305,7 @@ var tnr.nanny = tnr.nanny || new function(){
           _NannySession.Zone.active.mousedrag += distance;
         }
       });
+
       _NannySession.element.addEventListener( 'mouseup', function( event ){
         if(paused){ return }
         _NannySession.distance.mousereleased++;
@@ -409,10 +314,12 @@ var tnr.nanny = tnr.nanny || new function(){
 
       // touch Events
       var touchstart, touchend;
+
       _NannySession.element.addEventListener( 'touchstart', function( event ){
         if(paused){ return }
         touchstart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
       });
+
       _NannySession.element.addEventListener( 'touchmove', function( event ){
         if(paused){ return }
         //console.log(event);
@@ -440,6 +347,47 @@ var tnr.nanny = tnr.nanny || new function(){
 
       // PRESET TIME AND ONFRAME EVENTS
 
+      // TODO: repair Replay by heatmap
+      _NannySession.Replay = {
+
+        storage: [],
+
+        temp: { q: false, t: false, p:false },
+
+        setTemp: function(){
+          _NannySession.Replay.temp.t = new Date().getTime();
+          _NannySession.Replay.temp.p = [
+            _NannySession.fixTo3(App.camera.quaternion.x),
+            _NannySession.fixTo3(App.camera.quaternion.y),
+            _NannySession.fixTo3(App.camera.quaternion.z),
+            _NannySession.fixTo3(App.camera.quaternion.w)
+          ];
+          _NannySession.Replay.temp.p = App.Markers.active.pointIndex;
+        },
+        
+        newMoment: function(){
+          if(!_NannySession.Replay.temp.t){ return };
+          var Moment = new function(){
+            this.t1 = _NannySession.Replay.temp.t;
+            this.t2 = _NannySession.time.current;
+            this.q1 = _NannySession.Replay.temp.q;
+            this.q2 = [
+              _NannySession.fixTo3(App.camera.quaternion.x),
+              _NannySession.fixTo3(App.camera.quaternion.y),
+              _NannySession.fixTo3(App.camera.quaternion.z),
+              _NannySession.fixTo3(App.camera.quaternion.w)
+            ];
+            this.p1 = _NannySession.Replay.temp.p;
+            this.p2 = App.Markers.active.pointIndex;
+            this.tr = this.p1 == this.p2 ? 0 : 1;
+          };
+          _NannySession.Replay.storage.push( Moment );
+          _NannySession.Replay.temp = { q: false, t: false, p: false };
+        }
+
+
+      };
+
       _NannySession.onFrame = function(){
         if(paused){ return }
 
@@ -450,7 +398,7 @@ var tnr.nanny = tnr.nanny || new function(){
 
         _NannySession.Zone.active.time += _NannySession.time.gap;
 
-        if(_NannySession.heatmapPoint && (_NannySession.time.frame % 20 == 0)){
+        if(_NannySession.heatmapPoint && (_NannySession.time.frame % 10 == 0)){
           _NannySession.heatmapHistory.push(_NannySession.heatmapPoint);
           _NannySession.heatmapPoint = false;
         }
@@ -465,38 +413,6 @@ var tnr.nanny = tnr.nanny || new function(){
         _NannySession.onFrame(); 
       });
 
-      var render = true;
-      _NannySession.renderStat = function(){
-        if(!render || !options.statContainer ){return}
-
-        var St = _NannySession.getData();
-
-        $('#stat_transition_total').html( St.zones.threejs.transitions + St.zones.map.transitions + St.zones.slider.transitions );
-        $('#stat_transition_threejs').html(St.zones.threejs.transitions);
-        $('#stat_transition_map').html(St.zones.map.transitions);
-        $('#stat_transition_slider').html(St.zones.slider.transitions);
-
-        $('#stat_distance_total').html( St.zones.threejs.distance + St.zones.map.distance + St.zones.slider.distance );
-        $('#stat_distance_threejs').html(St.zones.threejs.distance);
-        $('#stat_distance_map').html(St.zones.map.distance);
-        $('#stat_distance_slider').html(St.zones.slider.distance);
-
-        var fullTime = Math.round( _NannySession.time.total() / 1000 );
-        var sec = fullTime % 60;
-        var min = (fullTime - sec > 0) ? ((fullTime- sec)/60) : 0;
-
-        $('#stat_time_Zthreejs').html( St.zones.threejs.time);
-        $('#stat_time_Zmap').html( St.zones.map.time);
-        $('#stat_time_zSlider').html( St.zones.slider.time);
-
-        $('#stat_time_total').html( 'm: ' + min + ' s: ' + sec );
-        $('#stat_time_3d').html(St.modes.default.time);
-        $('#stat_time_fullscreen').html(St.modes.fullscreen.time);
-        $('#stat_time_virtualreality').html(St.modes.virtualReality.time);
-
-        // $('#'+options.statContainer).html( dZones );
-      };
-
       //$( $window.location.pathname).trigger( 'change', function(){
       //  _NannySession.saveToStorage();
       //});
@@ -508,171 +424,6 @@ var tnr.nanny = tnr.nanny || new function(){
         Nanny.Utility.saveToStorage( _NannySession );
       };
 
-    };
-
-    // Statistics Object
-    Nanny.StatisticResult = function(){
-      var _NannyStatResult = this;
-
-      _NannyStatResult.query = { filterType: '', filterId:   '' };
-      _NannyStatResult.storage = {};
-      _NannyStatResult.history = {};
-
-      _NannyStatResult.getFromLocalStorage = function(UID){
-          var str = localStorage.getItem(UID);
-          if( str ){
-           _NannyStatResult.storage = JSON.parse( str );
-          
-           _NannyStatResult.Zone = _NannyStatResult.storage.state.zones;
-           _NannyStatResult.Point = _NannyStatResult.storage.state.points;
-           _NannyStatResult.Mode = _NannyStatResult.storage.state.modes;
-           _NannyStatResult.Orientation = _NannyStatResult.storage.state.orientations;
-          
-           _NannyStatResult.time = _NannyStatResult.storage.time;
-           _NannyStatResult.distance = _NannyStatResult.storage.distance;
-          }
-      };
-
-      _NannyStatResult.presetFromStorage = function( UID ){
-        if( UID in _NannyStatResult.StatisticsCollection ){
-
-          //console.log( UID, _NannyStatResult.StatisticsCollection  );
-
-          _NannyStatResult.storage = _NannyStatResult.StatisticsCollection[UID].value;
-
-          _NannyStatResult.Zone = _NannyStatResult.storage.state.zones;
-
-          _NannyStatResult.time = _NannyStatResult.storage.time;
-          _NannyStatResult.distance = _NannyStatResult.storage.distance;
-
-        }
-      };
-
-
-
-      _NannyStatResult.activeHistory = '';
-
-      _NannyStatResult.activeHistoryA = function(){
-        return _NannyStatResult.activeHistory.split('_');
-      };
-
-      _NannyStatResult.activeHistoryName = function(UID){
-        var _stat = _NannyStatResult.StatisticsCollection.getByUID( UID );
-        if(!_stat) return false;
-        return _stat.tourname;
-      };
-
-      _NannyStatResult.activeHistoryH = function(){
-        var arr = _NannyStatResult.activeHistory.split('_');
-        return arr[1] + ' ' + arr[2];
-      };
-
-      var StatisticsCollection = function( userStatistic ){
-        var self = this;
-
-        //_.each( userStatistic, function( _singleStatistic ){
-        //  self[ _singleStatistic._id ] = {
-        //    user:     _singleStatistic.user,
-        //    value:    _singleStatistic.value,
-        //    uid:      _singleStatistic._id,
-        //    scene:    _singleStatistic.apartment,
-        //    created:  _singleStatistic.created,
-        //    time: self.getReadebleTime(_singleStatistic.created)
-        //  };
-        //});
-        /*
-         for( var A in localStorage ){
-         var el = A.split('_');
-         if(el[0] && el[0] == 'TourSession'){
-         _NannyStatResult.StatisticsCollection.push({
-         uid: A,
-         scene: el[1],
-         tourname: '<b>' + el[1] + '</b> <small>' + el[2] + '</small >'
-         });
-         }
-         }
-         */
-      };
-      StatisticsCollection.prototype.getReadebleTime = function( data ){
-        var now = new Date( data );
-        return now.getUTCFullYear() +'-'+ now.getUTCMonth() +'-'+ now.getUTCDate() +' '+ now.getUTCHours() +':'+ now.getUTCMinutes() +':'+ now.getUTCSeconds();
-      };
-      StatisticsCollection.prototype.add = function(_Statistic ){
-        this[ _Statistic.uid ] = _Statistic;
-      };
-      StatisticsCollection.prototype.getByUID = function( UID ){
-        if( UID in this ){ return this[UID]; } else { return false; }
-      };
-      StatisticsCollection.prototype.remove = function( UID ){
-        if( UID in this ){
-          delete self[UID];
-          return true;
-        } else {
-          return false;
-        }
-      };
-
-      _NannyStatResult.StatisticsCollection = new StatisticsCollection();
-
-      _NannyStatResult.getStorage = function( callback ){
-        if( _NannyStatResult.query.filterType && _NannyStatResult.query.filterId ){
-          var _query = {};
-          _query[_NannyStatResult.query.filterType] = _NannyStatResult.query.filterId;
-          //UserStatistic.query( _query, function(userStatistic) {
-          //  _NannyStatResult.StatisticsCollection = new StatisticsCollection( userStatistic );
-          //  callback( _NannyStatResult.StatisticsCollection );
-          //});
-        }
-      };
-
-      _NannyStatResult.compliteHistory = function( UID ){
-        if(UID){ _NannyStatResult.activeHistory = UID; }
-        if(_NannyStatResult.activeHistory != ''){
-          _NannyStatResult.presetFromStorage( _NannyStatResult.activeHistory );
-          //console.log( _NannyStatResult.storage );
-          _NannyStatResult.history = Nanny.Utility.History.getHistory( _NannyStatResult.storage.state, _NannyStatResult.storage.time );
-        }
-      };
-
-      _NannyStatResult.computeHistory = function( _history ){
-        _NannyStatResult.presetFromStorage( _history );
-        return Nanny.Utility.History.getHistory( _NannyStatResult.storage.state, _NannyStatResult.storage.time );
-      };
-
-      _NannyStatResult.constructReplayLine = function(){
-        if(!_NannyStatResult.storage.replay){ return }
-        var replayLine = [];
-
-        for( var i = 0; i < _NannyStatResult.storage.replay.length; i++){
-          var frameC = _NannyStatResult.storage.replay[i];
-          var frameF = _NannyStatResult.storage.replay[i+1];
-
-          replayLine.push(_NannyStatResult.storage.replay[i]);
-
-          if(frameF){
-
-            var Moment = new function(){
-              this.t1 = frameC.t2;
-              this.t2 = frameF.t1;
-              this.q1 = frameC.q2;
-              this.q2 = frameF.q1;
-              this.p1 = frameC.p2;
-              this.p2 = frameF.p1;
-              this.tr = 0;
-            };
-
-            replayLine.push(Moment);
-          }
-        }
-        return replayLine;
-      };
-
-      _NannyStatResult.replayLine = [];
-      _NannyStatResult.prepareReplay = function(){
-        _NannyStatResult.replayLine = _NannyStatResult.constructReplayLine();
-      };
-
-      _NannyStatResult.getStorage();
     };
 
     Nanny.Utility = {};
@@ -745,7 +496,7 @@ var tnr.nanny = tnr.nanny || new function(){
       return tempArr;
     };
 
-    Nanny.Utility.History.createData = function(obj){
+    Nanny.Utility.History.createData = function( obj ){
       var tempArr = [];
       for( var i = 0; i < obj.timeHistory.length; i++ ){
         var nextElement = {};
@@ -758,33 +509,6 @@ var tnr.nanny = tnr.nanny || new function(){
         tempArr.push(nextElement);
       }
       return tempArr;
-    };
-
-    Nanny.Utility.History.getHistory = function( _state, _time ){
-
-      var nZones = Nanny.Utility.History.getData( _state.zones );
-      var fixTimeEnd = _time.end;
-
-      // ZONES
-      if(nZones.length == 1){
-        nZones[0].duration = fixTimeEnd - _time.start;
-      } else if (nZones.length == 2){
-        nZones[0].duration = nZones[1].time - _time.start;
-        nZones[1].duration = fixTimeEnd - nZones[1].time;
-      } else if(nZones.length > 2){
-        for(var i = 0; i < nZones.length; i++){
-          if(i==0){
-            nZones[0].duration = nZones[1].time - _time.start;
-          } else if ( nZones[i+1] ){
-            nZones[i].duration = nZones[i+1].time - nZones[i].time;
-          } else {
-            nZones[i].duration = fixTimeEnd - nZones[i].time;
-          }
-        }
-      }
-
-      var response = { zones: nZones };
-      return response;
     };
 
     // Special class to look at the same zones
@@ -874,4 +598,8 @@ var tnr.nanny = tnr.nanny || new function(){
 
     };
 
-};
+
+  };
+
+//  return NANNY;
+//}]);
