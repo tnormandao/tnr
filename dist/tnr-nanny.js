@@ -1,7 +1,7 @@
+// Nanny is watching you! 0_0
 
-
-  // Nanny is watching you! 0_0
-  var NANNY = new function(){
+var tnr = tnr || {};		 
+var tnr.nanny = tnr.nanny || new function(){
 
     var UID = function( prefix ){
       var p = prefix || 'uid_';
