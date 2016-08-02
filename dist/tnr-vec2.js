@@ -16,6 +16,7 @@
             Vec2.prototype.distance = function( other ){ return Math.sqrt( Math.abs(Math.pow( other.x - this.x, 2)) + Math.abs(Math.pow( other.y - this.y, 2)) ); };
             Vec2.prototype.angleTo = function( other ){return((-Math.PI/2+ -(Math.atan2((other.y-this.y),(other.x-this.x))))+(Math.PI*2))%(Math.PI*2) };
             Vec2.prototype.pointOnRadius = function( A, R ){ var self = this; return { x: R*Math.sin(A) + self.x, y: R*Math.cos(A)+ self.y }; };
+            Vec2.prototype.pointOnRadius2 = function( C, A, R ){ return [ R * Math.sin( A ) + C[0], R * Math.cos( A )+ C[1] ]; };
             Vec2.prototype.center = function(other){ return this.lerp( other, 0.5 ); };
             Vec2.prototype.toAlphaByDimension = function(other){ return new this.constructor( this.x / other.x, this.y / other.y  ); };
             Vec2.prototype.sumxy = function(){ return Math.abs(this.x) + Math.abs(this.y) };
