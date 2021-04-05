@@ -8,7 +8,7 @@ Vec2.prototype.minus = function( other ){ this.x -= other.x; this.y -= other.y; 
 Vec2.prototype.divide = function( other ){ this.x /= other.x; this.y /= other.y; return this; };
 Vec2.prototype.multiply = function( other ){ this.x *= other.x; this.y *= other.y; return this; };
 
-Vec2.prototype.mirror = function(){ this.x = -this.x; this.y = -this.y; return this; };
+Vec2.prototype.negate = function(){ this.x = -this.x; this.y = -this.y; return this; };
 Vec2.prototype.abs = function(){  this.x = Math.abs(this.x); this.y = Math.abs(this.y);  return this; };
 
 Vec2.prototype.lerp = function( other, alpha ){ var p1 = this.clone(), p4 = p1.plus( other.clone().minus(p1).multiply({ x: alpha, y: alpha }) ); return p4;};
